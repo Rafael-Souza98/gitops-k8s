@@ -6,13 +6,8 @@ down-cluster:
 	@kind delete clusters cluster-obs
 
 
-setup-kubeprometheus:
-	@kubectl apply --server-side -f kube-prometheus/manifests/setup
-	@kubectl wait \
-		--for condition=Established \
-		--all CustomResourceDefinition \
-		--namespace=monitoring
-	@kubectl apply -f manifests/
+kube-prometheus:
+	@helm upgrade --install -f helm/kube-prometheus-stack/values.yaml kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
 
 setup-argocd:
 	@kubectl create namespace argocd
