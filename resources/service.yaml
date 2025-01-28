@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-svc
-  namespace: nginx
+  name: apache-svc
+  namespace: apache
 spec:
   ports:
   - port: 80
     protocol: TCP
     targetPort: 80
   selector:
-    app: nginx
+    app: apache
   type: ClusterIP

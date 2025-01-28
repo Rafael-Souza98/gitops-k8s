@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-k8s
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: nginx
+    server: https://kubernetes.default.svc
+  source:
+    path: resources/
+    repoURL: https://github.com/Rafael-Souza98/gitops-k8s.git
+    targetRevision: dev
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
